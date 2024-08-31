@@ -31,7 +31,7 @@ namespace CoreApi.Services
 				audience: configuration["AppSettings:ValidAudience"],
 				claims: new List<Claim> {
 					new Claim("UserName", request.Username),
-					new Claim("RecordId", request.RecordId.ToString()) // RecordId'yi de ekledik
+					new Claim("UserId", request.RecordId.ToString()) // RecordId'yi de ekledik
 				},
 				notBefore: dateTimeNow,
 				expires: dateTimeNow.Add(TimeSpan.FromMinutes(500)),

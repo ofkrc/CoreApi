@@ -1,4 +1,5 @@
 using CoreApi.Context;
+using CoreApi.Core.Middleware;
 using CoreApi.Repositories;
 using CoreApi.Services;
 using CoreApi.Services.Interfaces;
@@ -18,7 +19,6 @@ builder.Services.AddControllers()
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -47,6 +47,8 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
@@ -74,7 +76,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Secret"])),
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = false,
+        ValidateLifetime = true,
         ValidateIssuerSigningKey = true
     };
 });
@@ -89,7 +91,6 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });
-
 
 var app = builder.Build();
 
@@ -106,10 +107,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowSpecificOrigin"); // CORS ayarlarýný kullanma
+app.UseCors("AllowAnyOrigin"); // CORS ayarlarýný kullanma
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<UserIdMiddleware>(); // Middleware'i buraya ekleyin
 app.MapControllers();
 
 app.Run();

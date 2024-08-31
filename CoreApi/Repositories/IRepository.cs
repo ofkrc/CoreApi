@@ -23,5 +23,7 @@ namespace CoreApi.Repositories
         Task<IEnumerable<T>> GetSortedAsync<TKey>(Expression<Func<T, TKey>> keySelector, bool descending = false);
         Task<(IEnumerable<T> items, int totalCount)> GetPagedAsync<TKey>(
             int pageIndex, int pageSize, Expression<Func<T, TKey>> keySelector, bool descending = false);
+
+        // Yeni metodlar ekleyebiliriz
     }
 }
