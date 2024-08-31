@@ -1,7 +1,7 @@
-﻿using EmaAPI.Core;
+﻿using CoreApi.Core;
 using System.ComponentModel.DataAnnotations;
 
-namespace EmaAPI.Models.Request.InvoiceLine
+namespace CoreApi.Models.Request.InvoiceLine
 {
 	public class InvoiceLineRequestModel : EntityBase
     {

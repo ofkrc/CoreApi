@@ -1,4 +1,4 @@
-﻿namespace EmaAPI.Core
+﻿namespace CoreApi.Core
 {
     public class IEntityBase
     {

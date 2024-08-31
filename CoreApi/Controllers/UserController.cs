@@ -1,6 +1,7 @@
-﻿using EmaAPI.Models;
-using EmaAPI.Models.Request.User;
-using EmaAPI.Services.Interfaces;
+﻿using CoreApi.Models;
+using CoreApi.Models.Request.User;
+using CoreApi.Models.Response.User;
+using CoreApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -22,15 +23,15 @@ public class UserController : ControllerBase
 		return CreatedAtAction(nameof(Register), new { id = newUser.RecordId }, newUser);
 	}
 
-	[HttpPost("Login")]
-	public ActionResult<User> Login([FromBody] UserLoginRequestModel request)
-	{
-		var loginUser = _userService.LoginUserAsync(request);
+    [HttpPost("Login")]
+    public async Task<ActionResult<UserLoginResponse>> Login([FromBody] UserLoginRequestModel request)
+    {
+        var loginUser = await _userService.LoginUserAsync(request);
 
-		return Ok(loginUser);
-	}
+        return Ok(loginUser);
+    }
 
-	[HttpGet("Search")]
+    [HttpGet("Search")]
 	public ActionResult<List<User>> SearchUsers([FromQuery] string searchTerm)
 	{
 		var users = _userService.SearchUsers(searchTerm);

@@ -1,13 +1,13 @@
-﻿using EmaAPI.Helpers;
-using EmaAPI.Models;
-using EmaAPI.Models.Request.User;
-using EmaAPI.Models.Response.User;
-using EmaAPI.Models.Token;
-using EmaAPI.Repositories;
-using EmaAPI.Services.Interfaces;
+﻿using CoreApi.Helpers;
+using CoreApi.Models;
+using CoreApi.Models.Request.User;
+using CoreApi.Models.Response.User;
+using CoreApi.Models.Token;
+using CoreApi.Repositories;
+using CoreApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmaAPI.Services
+namespace CoreApi.Services
 {
     public class UserService : IUserService
     {

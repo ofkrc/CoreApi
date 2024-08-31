@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace EmaAPI.Models
+namespace CoreApi.Models
 {
 	public class User
 	{

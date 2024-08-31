@@ -1,6 +1,6 @@
-﻿using EmaAPI.Models.Request.Invoice;
+﻿using CoreApi.Models.Request.Invoice;
 
-namespace EmaAPI.Services.Interfaces
+namespace CoreApi.Services.Interfaces
 {
     public interface IInvoiceService
     {

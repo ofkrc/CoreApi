@@ -1,9 +1,9 @@
-﻿using EmaAPI.Models.Request.Invoice;
-using EmaAPI.Services.Interfaces;
+﻿using CoreApi.Models.Request.Invoice;
+using CoreApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmaAPI.Controllers
+namespace CoreApi.Controllers
 {
     [Authorize]
 	[ApiController]

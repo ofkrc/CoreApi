@@ -1,8 +1,8 @@
-﻿using EmaAPI.Core;
-using EmaAPI.Models.Request.Invoice;
+﻿using CoreApi.Core;
+using CoreApi.Models.Request.Invoice;
 using System.ComponentModel.DataAnnotations;
 
-namespace EmaAPI.Models.Request.Item
+namespace CoreApi.Models.Request.Item
 {
 	public class ItemRequestModel : EntityBase
     {

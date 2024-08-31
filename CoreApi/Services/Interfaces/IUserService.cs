@@ -1,8 +1,8 @@
-﻿using EmaAPI.Models.Request.User;
-using EmaAPI.Models.Response.User;
-using EmaAPI.Models;
+﻿using CoreApi.Models.Request.User;
+using CoreApi.Models.Response.User;
+using CoreApi.Models;
 
-namespace EmaAPI.Services.Interfaces
+namespace CoreApi.Services.Interfaces
 {
     public interface IUserService
     {

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using EmaAPI.Core;
+using CoreApi.Core;
 
-namespace EmaAPI.Models
+namespace CoreApi.Models
 {
 	public class Customer : EntityBase
 	{

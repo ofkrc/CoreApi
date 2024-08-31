@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace EmaAPI.Helpers
+namespace CoreApi.Helpers
 {
     public static class GenericMappingHelper
     {

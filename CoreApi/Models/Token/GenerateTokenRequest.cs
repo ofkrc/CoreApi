@@ -1,4 +1,4 @@
-﻿namespace EmaAPI.Models.Token
+﻿namespace CoreApi.Models.Token
 {
 	public class GenerateTokenRequest
 	{

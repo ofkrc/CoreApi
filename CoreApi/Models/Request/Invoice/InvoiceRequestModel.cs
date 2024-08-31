@@ -1,8 +1,8 @@
-﻿using EmaAPI.Core;
-using EmaAPI.Models.Request.InvoiceLine;
-using EmaAPI.Models.Request.Item;
+﻿using CoreApi.Core;
+using CoreApi.Models.Request.InvoiceLine;
+using CoreApi.Models.Request.Item;
 
-namespace EmaAPI.Models.Request.Invoice
+namespace CoreApi.Models.Request.Invoice
 {
 	public class InvoiceRequestModel : EntityBase
     {

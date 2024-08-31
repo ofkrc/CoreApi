@@ -1,7 +1,7 @@
-﻿using EmaAPI.Models.Request.Company;
-using EmaAPI.Models;
+﻿using CoreApi.Models.Request.Company;
+using CoreApi.Models;
 
-namespace EmaAPI.Services.Interfaces
+namespace CoreApi.Services.Interfaces
 {
     public interface ICompanyService
     {

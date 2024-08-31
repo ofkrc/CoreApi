@@ -1,7 +1,7 @@
-﻿using EmaAPI.Models.Request.Item;
-using EmaAPI.Models;
+﻿using CoreApi.Models.Request.Item;
+using CoreApi.Models;
 
-namespace EmaAPI.Services.Interfaces
+namespace CoreApi.Services.Interfaces
 {
     public interface IItemService
     {

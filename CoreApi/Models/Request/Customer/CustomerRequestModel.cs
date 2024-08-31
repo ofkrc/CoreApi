@@ -1,9 +1,9 @@
 ﻿
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using EmaAPI.Core;
+using CoreApi.Core;
 
-namespace EmaAPI.Models.Request.Customer
+namespace CoreApi.Models.Request.Customer
 {
 	public class CustomerRequestModel : EntityBase
     {

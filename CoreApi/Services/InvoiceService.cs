@@ -1,10 +1,10 @@
-﻿using EmaAPI.Helpers;
-using EmaAPI.Models.Request.Invoice;
-using EmaAPI.Repositories;
-using EmaAPI.Services.Interfaces;
+﻿using CoreApi.Helpers;
+using CoreApi.Models.Request.Invoice;
+using CoreApi.Repositories;
+using CoreApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmaAPI.Services
+namespace CoreApi.Services
 {
     public class InvoiceService : IInvoiceService
     {

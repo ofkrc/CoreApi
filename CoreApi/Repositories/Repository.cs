@@ -1,8 +1,8 @@
-﻿using EmaAPI.Context;
+﻿using CoreApi.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace EmaAPI.Repositories
+namespace CoreApi.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

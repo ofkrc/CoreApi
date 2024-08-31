@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace EmaAPI.Core
+namespace CoreApi.Core
 {
     public class EntityBase 
     {

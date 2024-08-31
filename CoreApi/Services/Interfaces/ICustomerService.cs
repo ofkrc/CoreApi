@@ -1,7 +1,7 @@
-﻿using EmaAPI.Models.Request.Customer;
-using EmaAPI.Models;
+﻿using CoreApi.Models.Request.Customer;
+using CoreApi.Models;
 
-namespace EmaAPI.Services.Interfaces
+namespace CoreApi.Services.Interfaces
 {
     public interface ICustomerService
     {

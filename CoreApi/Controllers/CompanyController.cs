@@ -1,10 +1,10 @@
-﻿using EmaAPI.Models;
-using EmaAPI.Models.Request.Company;
-using EmaAPI.Services.Interfaces;
+﻿using CoreApi.Models;
+using CoreApi.Models.Request.Company;
+using CoreApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmaAPI.Controllers
+namespace CoreApi.Controllers
 {
     [Authorize]
 	[ApiController]

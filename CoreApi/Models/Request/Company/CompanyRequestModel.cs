@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using EmaAPI.Core;
+using CoreApi.Core;
 
-namespace EmaAPI.Models.Request.Company
+namespace CoreApi.Models.Request.Company
 {
 	public class CompanyRequestModel : EntityBase
 	{

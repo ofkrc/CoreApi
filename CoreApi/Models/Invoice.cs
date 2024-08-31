@@ -1,5 +1,5 @@
-﻿using EmaAPI.Core;
-using EmaAPI.Models;
+﻿using CoreApi.Core;
+using CoreApi.Models;
 using Microsoft.AspNetCore.Components.Forms;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

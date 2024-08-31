@@ -1,4 +1,4 @@
-﻿namespace EmaAPI.Models.Request.User
+﻿namespace CoreApi.Models.Request.User
 {
 	public class UserLoginRequestModel
 	{

@@ -1,7 +1,7 @@
-using EmaAPI.Context;
-using EmaAPI.Repositories;
-using EmaAPI.Services;
-using EmaAPI.Services.Interfaces;
+using CoreApi.Context;
+using CoreApi.Repositories;
+using CoreApi.Services;
+using CoreApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

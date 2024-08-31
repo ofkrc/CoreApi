@@ -1,10 +1,10 @@
-﻿using EmaAPI.Helpers;
-using EmaAPI.Models;
-using EmaAPI.Models.Request.Company;
-using EmaAPI.Repositories;
-using EmaAPI.Services.Interfaces;
+﻿using CoreApi.Helpers;
+using CoreApi.Models;
+using CoreApi.Models.Request.Company;
+using CoreApi.Repositories;
+using CoreApi.Services.Interfaces;
 
-namespace EmaAPI.Services
+namespace CoreApi.Services
 {
     public class CompanyService : ICompanyService
     {

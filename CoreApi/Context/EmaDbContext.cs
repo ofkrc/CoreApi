@@ -1,7 +1,7 @@
-﻿using EmaAPI.Models;
+﻿using CoreApi.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmaAPI.Context
+namespace CoreApi.Context
 {
     public class EmaDbContext : DbContext
     {
