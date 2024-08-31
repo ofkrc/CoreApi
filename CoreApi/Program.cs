@@ -1,6 +1,6 @@
 using CoreApi.Context;
 using CoreApi.Core.Middleware;
-using CoreApi.Repositories;
+using CoreApi.Core.Repositories;
 using CoreApi.Services;
 using CoreApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

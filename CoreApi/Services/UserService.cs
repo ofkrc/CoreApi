@@ -1,9 +1,9 @@
-﻿using CoreApi.Helpers;
+﻿using CoreApi.Core.Helpers;
+using CoreApi.Core.Repositories;
 using CoreApi.Models;
 using CoreApi.Models.Request.User;
 using CoreApi.Models.Response.User;
 using CoreApi.Models.Token;
-using CoreApi.Repositories;
 using CoreApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

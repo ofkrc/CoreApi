@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http; // IHttpContextAccessor için gerekli
 using System.Linq.Expressions;
 using CoreApi.Core;
 
-namespace CoreApi.Repositories
+namespace CoreApi.Core.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

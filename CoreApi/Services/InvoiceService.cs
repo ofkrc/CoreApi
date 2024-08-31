@@ -1,6 +1,6 @@
-﻿using CoreApi.Helpers;
+﻿using CoreApi.Core.Helpers;
+using CoreApi.Core.Repositories;
 using CoreApi.Models.Request.Invoice;
-using CoreApi.Repositories;
 using CoreApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
