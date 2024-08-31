@@ -1,4 +1,5 @@
-﻿using CoreApi.Models;
+﻿using CoreApi.Core.Base.Model;
+using CoreApi.Models;
 using CoreApi.Models.Request.User;
 using CoreApi.Models.Response.User;
 using CoreApi.Services.Interfaces;
@@ -6,92 +7,129 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserController : ControllerBase
+public class UserController : BaseController
 {
-	private readonly IUserService _userService;
+    private readonly IUserService _userService;
 
-	public UserController(IUserService userService)
-	{
-		_userService = userService;
-	}
+    public UserController(IUserService userService)
+    {
+        _userService = userService;
+    }
 
-	[HttpPost("Register")]
-	public ActionResult<User> Register([FromBody] UserRequestModel request)
-	{
-		var newUser = _userService.Register(request);
-
-		return CreatedAtAction(nameof(Register), new { id = newUser.RecordId }, newUser);
-	}
+    [HttpPost("Register")]
+    public ActionResult<BaseResponse<User>> Register([FromBody] UserRequestModel request)
+    {
+        try
+        {
+            var newUser = _userService.Register(request);
+            return SuccessResponse(newUser, "Kullanıcı başarıyla kaydedildi.");
+        }
+        catch (Exception ex)
+        {
+            return ErrorResponse<User>(ex.Message);
+        }
+    }
 
     [HttpPost("Login")]
-    public async Task<ActionResult<UserLoginResponse>> Login([FromBody] UserLoginRequestModel request)
+    public async Task<ActionResult<BaseResponse<UserLoginResponse>>> Login([FromBody] UserLoginRequestModel request)
     {
-        var loginUser = await _userService.LoginUserAsync(request);
-
-        return Ok(loginUser);
+        try
+        {
+            var loginUser = await _userService.LoginUserAsync(request);
+            return SuccessResponse(loginUser, "Giriş başarılı.");
+        }
+        catch (Exception ex)
+        {
+            return ErrorResponse<UserLoginResponse>(ex.Message);
+        }
     }
 
     [HttpGet("Search")]
-	public ActionResult<List<User>> SearchUsers([FromQuery] string searchTerm)
-	{
-		var users = _userService.SearchUsers(searchTerm);
-		return Ok(users);
-	}
+    public ActionResult<BaseResponse<List<User>>> SearchUsers([FromQuery] string searchTerm)
+    {
+        try
+        {
+            var users = _userService.SearchUsers(searchTerm);
+            return SuccessResponse(users, "Kullanıcılar başarıyla bulundu.");
+        }
+        catch (Exception ex)
+        {
+            return ErrorResponse<List<User>>(ex.Message);
+        }
+    }
 
-	[HttpGet("Get")]
-	public IActionResult Get()
-	{
-		var users = _userService.GetAllUsers();
-		return Ok(users);
-	}
+    [HttpGet("Get")]
+    public ActionResult<BaseResponse<List<User>>> Get()
+    {
+        try
+        {
+            var users = _userService.GetAllUsers();
+            return SuccessResponse(users, "Kullanıcılar başarıyla getirildi.");
+        }
+        catch (Exception ex)
+        {
+            return ErrorResponse<List<User>>(ex.Message);
+        }
+    }
 
-	[HttpGet("Get/{userId}")]
-	[NonAction]
-	public IActionResult GetUserById(int recordId)
-	{
-		var user = _userService.GetUserById(recordId);
+    [HttpGet("Get/{userId}")]
+    [NonAction]
+    public ActionResult<BaseResponse<User>> GetUserById(int recordId)
+    {
+        try
+        {
+            var user = _userService.GetUserById(recordId);
 
-		if (user == null)
-		{
-			return NotFound();
-		}
+            if (user == null)
+            {
+                return ErrorResponse<User>("Kullanıcı bulunamadı.");
+            }
 
-		return Ok(user);
-	}
+            return SuccessResponse(user, "Kullanıcı başarıyla getirildi.");
+        }
+        catch (Exception ex)
+        {
+            return ErrorResponse<User>(ex.Message);
+        }
+    }
 
-	[HttpPost("Update")]
-	public IActionResult Update([FromBody] UserRequestModel request)
-	{
-		try
-		{
-			// Güncellenmek istenen kullanıcının kaydını al
-			var updatedUser = _userService.Update(request);
+    [HttpPost("Update")]
+    public ActionResult<BaseResponse<User>> Update([FromBody] UserRequestModel request)
+    {
+        try
+        {
+            var updatedUser = _userService.Update(request);
 
-			// Kullanıcı bulunamazsa 404 Not Found döndür
-			if (updatedUser == null)
-			{
-				return NotFound();
-			}
+            if (updatedUser == null)
+            {
+                return ErrorResponse<User>("Kullanıcı bulunamadı.");
+            }
 
-			return Ok(updatedUser);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, $"Internal Server Error: {ex.Message}");
-		}
-	}
+            return SuccessResponse(updatedUser, "Kullanıcı başarıyla güncellendi.");
+        }
+        catch (Exception ex)
+        {
+            return ErrorResponse<User>(ex.Message);
+        }
+    }
 
+    [HttpDelete("Delete/{recordId}")]
+    public ActionResult<BaseResponse<string>> Delete(int recordId)
+    {
+        try
+        {
+            var user = _userService.GetUserById(recordId);
+            if (user == null)
+            {
+                return ErrorResponse<string>("Kullanıcı bulunamadı.");
+            }
 
-	[HttpDelete("Delete/{recordId}")]
-	public IActionResult Delete(int recordId)
-	{
-		var user = _userService.GetUserById(recordId);
-		if (user == null)
-		{
-			return NotFound();
-		}
-
-		_userService.Delete(user);
-		return NoContent();
-	}
+            _userService.Delete(user);
+            return SuccessResponse<string>("Kullanıcı başarıyla silindi.");
+        }
+        catch (Exception ex)
+        {
+            return ErrorResponse<string>(ex.Message);
+        }
+    }
 }

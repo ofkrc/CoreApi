@@ -1,4 +1,5 @@
-﻿using CoreApi.Models;
+﻿using CoreApi.Core.Base.Model;
+using CoreApi.Models;
 using CoreApi.Models.Request.Customer;
 using CoreApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -7,94 +8,113 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoreApi.Controllers
 {
     [Authorize]
-	[ApiController]
-	[Route("api/[controller]")]
-	public class CustomerController : ControllerBase
-	{
-		private readonly ICustomerService _customerService;
+    [ApiController]
+    [Route("api/[controller]")]
+    public class CustomerController : BaseController
+    {
+        private readonly ICustomerService _customerService;
 
-		public CustomerController(ICustomerService customerService)
-		{
-			_customerService = customerService;
-		}
+        public CustomerController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
 
-		[HttpPost("Insert")]
-		public ActionResult<Customer> Insert([FromBody] CustomerRequestModel request)
-		{
-			var newItem = _customerService.Insert(request);
+        [HttpPost("Insert")]
+        public ActionResult<BaseResponse<Customer>> Insert([FromBody] CustomerRequestModel request)
+        {
+            try
+            {
+                var newCustomer = _customerService.Insert(request);
+                return SuccessResponse(newCustomer, "Müşteri başarıyla eklendi.");
+            }
+            catch (Exception ex)
+            {
+                return ErrorResponse<Customer>(ex.Message);
+            }
+        }
 
-			return CreatedAtAction(nameof(Insert), new { id = newItem.RecordId }, newItem);
-		}
+        [HttpPut("Update")]
+        public ActionResult<BaseResponse<Customer>> Update(int customerId, [FromBody] CustomerRequestModel request)
+        {
+            try
+            {
+                var updatedCustomer = _customerService.Update(customerId, request);
+                if (updatedCustomer != null)
+                {
+                    return SuccessResponse(updatedCustomer, "Müşteri başarıyla güncellendi.");
+                }
+                return ErrorResponse<Customer>($"Customer with ID {customerId} not found.");
+            }
+            catch (Exception ex)
+            {
+                return ErrorResponse<Customer>(ex.Message);
+            }
+        }
 
-		[HttpPut("Update")]
-		public IActionResult Update(int customerId, [FromBody] CustomerRequestModel request)
-		{
-			var updatedCustomer = _customerService.Update(customerId, request);
-			if (updatedCustomer != null)
-			{
-				return Ok(updatedCustomer);
-			}
-			return NotFound();
-		}
+        [HttpGet("Get")]
+        public ActionResult<BaseResponse<IEnumerable<Customer>>> Get()
+        {
+            try
+            {
+                var customers = _customerService.Get();
+                return SuccessResponse(customers, "Müşteriler başarıyla getirildi.");
+            }
+            catch (Exception ex)
+            {
+                return ErrorResponse<IEnumerable<Customer>>(ex.Message);
+            }
+        }
 
-		[HttpGet("Get")]
-		public IActionResult Get()
-		{
-			try
-			{
-				var customers = _customerService.Get();
-				return Ok(customers);
-			}
-			catch (Exception ex)
-			{
-				return StatusCode(500, "Bir hata oluştu.");
-			}
-		}
+        [HttpGet("SearchCustomers")]
+        public ActionResult<BaseResponse<IEnumerable<Customer>>> SearchCustomers(string searchTerm)
+        {
+            try
+            {
+                var customers = _customerService.SearchCustomers(searchTerm);
+                return SuccessResponse(customers, "Arama sonuçları başarıyla getirildi.");
+            }
+            catch (Exception ex)
+            {
+                return ErrorResponse<IEnumerable<Customer>>(ex.Message);
+            }
+        }
 
-
-		[HttpGet("SearchCustomers")]
-		public IActionResult SearchCustomers(string searchTerm)
-		{
-			try
-			{
-				var customers = _customerService.SearchCustomers(searchTerm);
-				return Ok(customers);
-			}
-			catch (Exception ex)
-			{
-				return StatusCode(500, "Bir hata oluştu.");
-			}
-		}
-
-		[HttpDelete("{id}")]
-		public IActionResult Delete(int id)
-		{
-			try
-			{
-				_customerService.Delete(id);
-				return Ok("Müşteri başarıyla silindi.");
-			}
-			catch (InvalidOperationException ex)
-			{
-				return NotFound(ex.Message);
-			}
-			catch (Exception ex)
-			{
-				return StatusCode(500, "Bir hata oluştu.");
-			}
-		}
+        [HttpDelete("{id}")]
+        public ActionResult<BaseResponse<string>> Delete(int id)
+        {
+            try
+            {
+                _customerService.Delete(id);
+                return SuccessResponse("Müşteri başarıyla silindi.");
+            }
+            catch (InvalidOperationException ex)
+            {
+                return ErrorResponse<string>(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return ErrorResponse<string>("Bir hata oluştu.");
+            }
+        }
 
         [HttpGet("GetCustomerById")]
-        public IActionResult GetCustomerById(int id)
+        public ActionResult<BaseResponse<Customer>> GetCustomerById(int id)
         {
-            var customer = _customerService.GetCustomerById(id);
-
-            if (customer != null)
+            try
             {
-                return Ok(customer);
-            }
+                var customer = _customerService.GetCustomerById(id);
 
-            return NotFound($"RecordId {id} ile eşleşen müşteri bulunamadı.");
+                if (customer != null)
+                {
+                    return SuccessResponse(customer, "Müşteri başarıyla getirildi.");
+                }
+
+                return ErrorResponse<Customer>($"RecordId {id} ile eşleşen müşteri bulunamadı.");
+            }
+            catch (Exception ex)
+            {
+                return ErrorResponse<Customer>(ex.Message);
+            }
         }
     }
 }
